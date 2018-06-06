@@ -1,0 +1,110 @@
+﻿<Window x:Class="SpamBot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpamBot"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="480" Width="600">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+
+        <Style TargetType="Rectangle">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="2"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF9E9E9E" Offset="0"/>
+                        <GradientStop Color="#FF9E9E9E" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="261*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
+
+        <!-- От кого -->
+        <DockPanel>
+            <TextBlock Text="From:"/>
+            <TextBox Name="FromTextBox" Text="smtptesteritstep@gmail.com" IsEnabled="False"/>
+        </DockPanel>
+
+        <!-- Кому -->
+        <DockPanel Grid.Column="1">
+            <TextBlock Text="To:"/>
+            <TextBox Name="ToTextBox"/>
+        </DockPanel>
+
+        <Rectangle/>
+
+        <!-- Тема -->
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="1">
+            <TextBlock Text="Theme:"/>
+            <TextBox Name="ThemeTextBox"/>
+        </DockPanel>
+
+        <Rectangle Grid.Row="1"/>
+
+        <!-- Письмо -->
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="2">
+            <TextBlock Text="Text:" DockPanel.Dock="Top"/>
+            <TextBox Name="MessageTextBox" DockPanel.Dock="Top" TextWrapping="Wrap"
+                     Height="auto" Margin="10" VerticalContentAlignment="Top"/>
+        </DockPanel>
+
+        <Rectangle Grid.Row="2"/>
+
+        <!-- Прикрепить файл -->
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="3">
+            <Button Name="AttachFileBtn" Content="Add file" Width="70"
+                    FontSize="16" Margin="10" DockPanel.Dock="Left" Click="AddFileBtnClick" Foreground="Black"/>
+            <TextBlock Name="FileNameTextBlock" HorizontalAlignment="Left"
+                       FontSize="16"/>
+            <Button Name="SendBtn" Content="Send" Width="70" HorizontalAlignment="Right"
+                    DockPanel.Dock="Right" FontSize="16" Margin="10" Click="SendBtnClick"/>
+        </DockPanel>
+
+        <!-- Статус -->
+        <StatusBar Name="StatusBar" Grid.ColumnSpan="2" Grid.Row="4" Background="#FF9E9E9E">
+            <StatusBarItem>
+                <TextBlock Name="StatusText" Foreground="#FFEA0000" FontSize="16"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
